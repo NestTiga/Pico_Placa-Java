@@ -1,7 +1,10 @@
 package util;
 
+import errors.CustomException;
+import errors.dto.ErrorResponse;
 import lombok.NoArgsConstructor;
 import model.dto.DatosVehiculoDTO;
+import util.validations.Validar;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,18 +19,30 @@ public class PedirDatos {
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
 
-    public DatosVehiculoDTO solicitarDatos(){
-        DatosVehiculoDTO datos= DatosVehiculoDTO.builder()
-                .placa(solicitarPlaca())
-                .fechaHora(LocalDateTime.parse(solicitarFecha()+"T"+solicitarHora(), formatter))
-                .build();
-        return datos;
+    public DatosVehiculoDTO solicitarDatos() {
+        try {
+            DatosVehiculoDTO datos= DatosVehiculoDTO.builder()
+                    .placa(solicitarPlaca())
+                    .fechaHora(LocalDateTime.parse(solicitarFecha()+"T"+solicitarHora(), formatter))
+                    .build();
+            return datos;
+        }catch (CustomException e) {
+            ErrorResponse errorResponse= new ErrorResponse(e.getCodigo(), e.getMessage());
+            System.out.println(errorResponse);
+            return solicitarDatos();
+        }
+
     }
 
-    private String solicitarPlaca(){
+    private String solicitarPlaca() throws CustomException {
         System.out.println("Ingrese la placa del vehiculo");
+        System.out.println("Ejemplo: ABC-1234");
         String placa = sc.nextLine();
-        return placa;
+        if (Validar.esPlacaValida(placa))
+            return placa;
+        else {
+            throw new CustomException("La placa ingresada no es valida", "400");
+        }
     }
 
     private String solicitarFecha(){
