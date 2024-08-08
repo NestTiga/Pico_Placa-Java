@@ -1,6 +1,5 @@
 package dao;
 
-import lombok.RequiredArgsConstructor;
 import model.AuditoriaVehiculo;
 
 import java.sql.Connection;
@@ -28,7 +27,11 @@ public class AuditoriaVehiculoDAO {
 
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
-                System.out.println("Auditoría insertada correctamente");
+                System.out.println();
+                System.out.println("¡Auditoría realizada correctamente!");
+                System.out.println();
+                System.out.println(datosAuditoria.getMensaje());
+                System.out.println("¡Gracias por usar nuestro sistema!");
             }
         } catch (SQLException e) {
             System.out.println("Error al insertar la auditodia: " + e.getMessage());

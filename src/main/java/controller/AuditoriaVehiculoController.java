@@ -13,7 +13,7 @@ public class AuditoriaVehiculoController {
 
     /**
      * Metodo que se encarga de auditar un vehiculo
-     * @param datosVehiculoDTO
+     * @param datosVehiculoDTO objeto que contiene la placa y la fecha
      */
     public void auditarVehiculo(DatosVehiculoDTO datosVehiculoDTO) {
         auditoriaVehiculoService.auditarVehiculo(datosVehiculoDTO.getPlaca(), datosVehiculoDTO.getFechaHora());

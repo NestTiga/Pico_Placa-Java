@@ -31,15 +31,15 @@ public class PedirDatos {
     }
 
     private String solicitarFecha(){
-        System.out.println("Ingrese la fecha de circulacion del vehiculo en formato yyyy-MM-dd");
+        System.out.println("Ingrese la fecha de circulacion del vehiculo en formato año-mes-dia");
         System.out.println("Ejemplo: 2021-12-31");
         String fecha = sc.nextLine();
         return fecha;
     }
 
     private String solicitarHora(){
-        System.out.println("Ingrese la hora de circulacion del vehiculo en formato HH:mm:ss");
-        System.out.println("Ejemplo: 23:59:59");
+        System.out.println("Ingrese la hora de circulacion del vehiculo en formato hora:minutos:segundos");
+        System.out.println("Ejemplo: 13:30:00");
         String hora = sc.nextLine();
         return hora;
     }
