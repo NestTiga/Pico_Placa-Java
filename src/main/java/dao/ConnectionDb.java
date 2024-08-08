@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionDb {
-    private String url = "jdbc:mysql://localhost:3306/";
-    private String user = "";
-    private String password = "";
+    private String url = "jdbc:mysql://localhost:3306/db_mardis";
+    private String user = "root";
+    private String password = "root";
 
     public Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, user, password);
