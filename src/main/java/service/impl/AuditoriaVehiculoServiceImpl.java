@@ -21,7 +21,7 @@ public class AuditoriaVehiculoServiceImpl implements AuditoriaVehiculoService {
     }
 
     /**
-     * Metodo que se encarga de auditar un vehiculo y guardar la auditoria segun la placa y la fecha
+     * Metodo que se encarga de auditar un vehiculo y guardar la auditoria segun la placa, fecha y hora
      * @param placa
      * @param fechaHora
      * @return
@@ -70,10 +70,10 @@ public class AuditoriaVehiculoServiceImpl implements AuditoriaVehiculoService {
                 }
                 break;
             case "sábado":
-                mensaje = "Sábado: libre circulación";
+                mensaje = "Sábado: " + GlobalMessage.SIN_PICO_PLACA;
                 break;
             case "domingo":
-                mensaje = "Domingo: libre circulación";
+                mensaje = "Domingo: " + GlobalMessage.SIN_PICO_PLACA;
                 break;
         }
 
@@ -85,6 +85,12 @@ public class AuditoriaVehiculoServiceImpl implements AuditoriaVehiculoService {
         auditoriaVehiculoDAO.guardarAuditoria(insertarAuditoria);
     }
 
+    /**
+     * Metodo que se encarga de validar el horario de circulacion de un vehiculo
+     * @param hora
+     * @param placa
+     * @return
+     */
     public String validarHorario(LocalTime hora, String placa){
         if ((hora.isAfter(Horarios.HORA_MADRUGADA_INICIO) && hora.isBefore(Horarios.HORA_MADRUGADA_FIN)) ||
                 (hora.isAfter(Horarios.HORA_TARDE_INICIO) && hora.isBefore(Horarios.HORA_TARDE_FIN))){
