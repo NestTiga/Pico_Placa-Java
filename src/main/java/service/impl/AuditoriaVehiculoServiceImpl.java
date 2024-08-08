@@ -28,14 +28,53 @@ public class AuditoriaVehiculoServiceImpl implements AuditoriaVehiculoService {
      */
     @Override
     public void auditarVehiculo(String placa, LocalDateTime fechaHora) {
-        String dia = fechaHora.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault());
-        LocalTime hora = fechaHora.toLocalTime();
-        String mensaje = "";
+        String dia = fechaHora.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault()); //Obtiene el dia de la fecha
+        LocalTime hora = fechaHora.toLocalTime(); //Obtiene la hora de la fecha
+        String mensaje = ""; //Mensaje que se guardara en la auditoria
+        int ultimoDigito = Integer.parseInt(placa.substring(placa.length() - 1)); //Obtiene el ultimo digito de la placa
 
-        if(dia.equals("sábado") || dia.equals("domingo")){
-            mensaje = dia + ": libre circulación";
-        } else {
-            mensaje = dia + ": " + validarHorario(hora, placa);
+        switch (dia){
+            case "lunes":
+                if(ultimoDigito == 1 || ultimoDigito ==2){
+                    mensaje = "Lunes: " + validarHorario(hora, placa);
+                }else {
+                    mensaje= "Lunes: " + GlobalMessage.SIN_PICO_PLACA;
+                }
+                break;
+            case "martes":
+                if(ultimoDigito == 3 || ultimoDigito == 4){
+                    mensaje = "Martes: " + validarHorario(hora, placa);
+                }else {
+                    mensaje= "Martes: " + GlobalMessage.SIN_PICO_PLACA;
+                }
+                break;
+            case "miércoles":
+                if(ultimoDigito == 5 || ultimoDigito == 6){
+                    mensaje = "Miércoles: " + validarHorario(hora, placa);
+                }else {
+                    mensaje= "Miércoles: " + GlobalMessage.SIN_PICO_PLACA;
+                }
+                break;
+            case "jueves":
+                if(ultimoDigito == 7 || ultimoDigito == 8){
+                    mensaje = "Jueves: " + validarHorario(hora, placa);
+                }else {
+                    mensaje= "Jueves: " + GlobalMessage.SIN_PICO_PLACA;
+                }
+                break;
+            case "viernes":
+                if(ultimoDigito == 9 || ultimoDigito == 0){
+                    mensaje = "Viernes: " + validarHorario(hora, placa);
+                }else {
+                    mensaje= "Viernes: " + GlobalMessage.SIN_PICO_PLACA;
+                }
+                break;
+            case "sábado":
+                mensaje = "Sábado: libre circulación";
+                break;
+            case "domingo":
+                mensaje = "Domingo: libre circulación";
+                break;
         }
 
         AuditoriaVehiculo insertarAuditoria = AuditoriaVehiculo.builder()
