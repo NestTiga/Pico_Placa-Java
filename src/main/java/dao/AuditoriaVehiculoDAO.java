@@ -1,5 +1,6 @@
 package dao;
 
+import errors.dto.ErrorResponse;
 import model.AuditoriaVehiculo;
 
 import java.sql.Connection;
@@ -34,7 +35,8 @@ public class AuditoriaVehiculoDAO {
                 System.out.println("¡Gracias por usar nuestro sistema!");
             }
         } catch (SQLException e) {
-            System.out.println("Error al insertar la auditodia: " + e.getMessage());
+            ErrorResponse errorResponse= new ErrorResponse("500", e.getMessage());
+            System.out.println(errorResponse);
         }
     }
 }
