@@ -1,0 +1,10 @@
+-- Crear la base
+CREATE SCHEMA `db_mardis`;
+
+-- Crear la tabla
+CREATE TABLE auditoria_vehiculos(
+id INT AUTO_INCREMENT PRIMARY KEY,
+placa VARCHAR(50) NOT NULL,
+fecha_hora TIMESTAMP NOT NULL,
+mensaje VARCHAR(250) NOT NULL
+);
